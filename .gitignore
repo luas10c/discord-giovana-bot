@@ -1,0 +1,14 @@
+node_modules
+
+.vscode/settings.json
+
+.env.development
+.env.production
+.env.testing
+.env.stating
+
+coverage
+
+dist
+
+build
