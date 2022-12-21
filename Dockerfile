@@ -9,9 +9,10 @@ RUN npm install
 
 COPY . .
 
+RUN npm run generate
+
 RUN npm run build
 
-RUN npm run generate
 
 FROM node:18-alpine as production
 
