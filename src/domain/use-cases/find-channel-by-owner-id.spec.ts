@@ -38,6 +38,22 @@ class InMemoryChannelRepository implements ChannelRepository {
 
     channels.push(channel)
   }
+  async remove(channelId: string): Promise<Channel | null> {
+    const removedChannel = channels.find(
+      (channel) => channel.channelId === channelId
+    )
+
+    if (!removedChannel) {
+      return null
+    }
+
+    const data = channels.filter((channel) => channel.channelId !== channelId)
+    channels.length = 0
+
+    channels.push(...data)
+
+    return removedChannel
+  }
 }
 
 const channelRepository = new InMemoryChannelRepository()

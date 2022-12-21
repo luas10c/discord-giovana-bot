@@ -3,6 +3,7 @@ import type { PrismaClient } from '@prisma/client'
 import { Channel } from '#/domain/entities/channel'
 import { ChannelRepository } from '#/domain/repositories/channel'
 import { FindByIdMapper } from '../mappers/find-by-id'
+import { RemoveMapper } from '../mappers/remove'
 
 export class PrismaChannelRepository implements ChannelRepository {
   constructor(private readonly prisma: PrismaClient) {}
@@ -46,5 +47,17 @@ export class PrismaChannelRepository implements ChannelRepository {
         ownerId: data.ownerId
       }
     })
+  }
+
+  async remove(channelId: string): Promise<Channel> {
+    const data = await this.prisma.channel.delete({
+      where: {
+        channelId
+      }
+    })
+
+    const channel = RemoveMapper.toDomain(data)
+
+    return channel
   }
 }

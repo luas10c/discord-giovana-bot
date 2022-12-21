@@ -7,6 +7,8 @@ import { FindChannelByOwnerId } from '#/domain/use-cases/find-channel-by-owner-i
 import { CreateChannel } from '#/domain/use-cases/create-channel'
 import { PrismaChannelRepository } from '../database/repositories/prisma-channel-repository'
 
+import { AutomaticRemove } from './automatic-remove '
+
 import {
   CreateChannelCommand,
   InviteMemberChannel,
@@ -14,6 +16,8 @@ import {
   DenyMemberChannel,
   PrivateChannel
 } from './subcommands'
+import { FindChannelById } from '#/domain/use-cases/find-channel-by-id'
+import { RemoveChannel } from '#/domain/use-cases/remove-channel'
 
 const commands = new SlashCommandBuilder()
   .setName('channel')
@@ -70,6 +74,8 @@ const prisma = new PrismaClient()
 const channelRepository = new PrismaChannelRepository(prisma)
 const createChannel = new CreateChannel(channelRepository)
 const findChannelByOnwerId = new FindChannelByOwnerId(channelRepository)
+const findChannelById = new FindChannelById(channelRepository)
+const removeChannel = new RemoveChannel(channelRepository)
 const createChannelCommand = new CreateChannelCommand(
   findChannelByOnwerId,
   createChannel
@@ -78,6 +84,8 @@ const inviteMemberChannelCommand = new InviteMemberChannel(findChannelByOnwerId)
 const allowMemberChannelCommand = new AllowMemberChannel(findChannelByOnwerId)
 const denyMemberChannelCommand = new DenyMemberChannel(findChannelByOnwerId)
 const privateChannel = new PrivateChannel(findChannelByOnwerId)
+
+const automaticRemove = new AutomaticRemove(findChannelById, removeChannel)
 
 export class Channel {
   static async loadCommands(api: REST, clientId: string) {
@@ -116,6 +124,19 @@ export class Channel {
       if (subCommand === 'private') {
         privateChannel.execute(interaction)
       }
+    })
+
+    client.on('voiceStateUpdate', async (oldState, newState) => {
+      if (!oldState) {
+        return
+      }
+
+      if (!oldState.channel) {
+        return
+      }
+
+      const oldChannel = await oldState.channel.fetch(true)
+      automaticRemove.execute(oldChannel)
     })
   }
 }

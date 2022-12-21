@@ -3,8 +3,7 @@ import { faker } from '@faker-js/faker'
 import { Channel } from '../entities/channel'
 
 import { ChannelRepository } from '../repositories/channel'
-
-import { FindChannelById } from './find-channel-by-id'
+import { RemoveChannel } from './remove-channel'
 import { CreateChannel } from './create-channel'
 
 const channels: Channel[] = []
@@ -58,28 +57,28 @@ class InMemoryChannelRepository implements ChannelRepository {
 
 const channelRepository = new InMemoryChannelRepository()
 
-describe('FindChannelById', () => {
+describe('RemoveChannel', () => {
   it('should be able return null', async () => {
-    const findChannel = new FindChannelById(channelRepository)
+    const removeChannel = new RemoveChannel(channelRepository)
 
-    const channel = await findChannel.execute({ channelId: '100000' })
-    expect(channel).toBeNull()
+    await expect(
+      removeChannel.execute({ channelId: '123456' })
+    ).resolves.toBeNull()
   })
 
-  it('should be able return channel', async () => {
+  it('should be able remove channel', async () => {
     const createChannel = new CreateChannel(channelRepository)
-    const findChannel = new FindChannelById(channelRepository)
+    const removeChannel = new RemoveChannel(channelRepository)
 
     const channelId = faker.random.numeric()
-    const newChannel = {
+    await createChannel.execute({
       channelId,
       type: 2,
       ownerId: faker.random.numeric()
-    }
+    })
 
-    await createChannel.execute(newChannel)
-
-    const channel = await findChannel.execute({ channelId })
-    expect(channel).toStrictEqual(expect.objectContaining(newChannel))
+    await expect(removeChannel.execute({ channelId })).resolves.toStrictEqual(
+      expect.objectContaining({ channelId })
+    )
   })
 })
