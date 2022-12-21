@@ -1,16 +1,7 @@
 version: '3.7'
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=example
-    ports:
-      - 5632:5432
-
-  production:
-    container_name: production
+  nodejs:
+    container_name: nodejs
     build:
       context: .
       target: production

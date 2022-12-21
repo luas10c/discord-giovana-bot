@@ -1,9 +1,9 @@
 import type { PrismaClient } from '@prisma/client'
 
-import { Channel } from '#/domain/entities/channel'
-import { ChannelRepository } from '#/domain/repositories/channel'
-import { FindByIdMapper } from '../mappers/find-by-id'
-import { RemoveMapper } from '../mappers/remove'
+import { Channel } from '../../../domain/entities/channel.js'
+import { ChannelRepository } from '../../../domain/repositories/channel.js'
+import { FindByIdMapper } from '../mappers/find-by-id.js'
+import { RemoveMapper } from '../mappers/remove.js'
 
 export class PrismaChannelRepository implements ChannelRepository {
   constructor(private readonly prisma: PrismaClient) {}

@@ -1,4 +1,4 @@
-import type { Channel } from '../entities/channel'
+import type { Channel } from '../entities/channel.js'
 
 export abstract class ChannelRepository {
   abstract findById(channelId: string): Promise<Channel>

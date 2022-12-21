@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker'
 
-import { ChannelRepository } from '../repositories/channel'
+import { ChannelRepository } from '../repositories/channel.js'
 
-import { Channel } from '../entities/channel'
+import { Channel } from '../entities/channel.js'
 
-import { FindChannelByOwnerId } from './find-channel-by-owner-id'
-import { CreateChannel } from './create-channel'
+import { FindChannelByOwnerId } from './find-channel-by-owner-id.js'
+import { CreateChannel } from './create-channel.js'
 
 const channels: Channel[] = []
 

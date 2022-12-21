@@ -1,5 +1,6 @@
 import { Channel as RawChannel } from '@prisma/client'
-import { Channel } from '#/domain/entities/channel'
+
+import { Channel } from '../../../domain/entities/channel.js'
 
 export class FindByIdMapper {
   static toDomain(channel: RawChannel) {

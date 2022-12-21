@@ -1,6 +1,6 @@
 import { EmbedBuilder } from '@discordjs/builders'
 
-import { FindChannelByOwnerId } from '#/domain/use-cases/find-channel-by-owner-id'
+import { FindChannelByOwnerId } from '../../../domain/use-cases/find-channel-by-owner-id.js'
 
 const notification = new EmbedBuilder()
 

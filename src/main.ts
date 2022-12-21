@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js'
 import { REST } from '@discordjs/rest'
 
-import { Channel } from './infra/commands'
+import { Channel } from './infra/commands/index.js'
 
 async function bootstrap() {
   const token = process.env.DISCORD_TOKEN

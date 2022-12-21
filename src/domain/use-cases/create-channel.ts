@@ -1,5 +1,6 @@
-import { Channel } from '../entities/channel'
-import { ChannelRepository } from '../repositories/channel'
+import { Channel } from '../entities/channel.js'
+
+import { ChannelRepository } from '../repositories/channel.js'
 
 interface CreateVoiceChannelRequest {
   channelId: string

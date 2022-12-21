@@ -1,5 +1,5 @@
-import { FindChannelById } from '#/domain/use-cases/find-channel-by-id'
-import { RemoveChannel } from '#/domain/use-cases/remove-channel'
+import { FindChannelById } from '../../domain/use-cases/find-channel-by-id.js'
+import { RemoveChannel } from '../../domain/use-cases/remove-channel.js'
 
 export class AutomaticRemove {
   constructor(

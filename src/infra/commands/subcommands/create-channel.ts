@@ -1,8 +1,8 @@
 import { ChannelType } from '@discordjs/core'
 import { EmbedBuilder } from '@discordjs/builders'
 
-import { CreateChannel } from '#/domain/use-cases/create-channel'
-import { FindChannelByOwnerId } from '#/domain/use-cases/find-channel-by-owner-id'
+import { CreateChannel } from '../../../domain/use-cases/create-channel.js'
+import { FindChannelByOwnerId } from '../../../domain/use-cases/find-channel-by-owner-id.js'
 
 export class CreateChannelCommand {
   constructor(

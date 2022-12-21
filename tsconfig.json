@@ -2,11 +2,10 @@
   "compilerOptions": {
     "declaration": false,
     "removeComments": true,
+    "module": "commonjs",
+    "target": "es2015",
     "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "#/*": ["src/*"]
-    }
+    "baseUrl": "."
   },
   "exclude": ["node_modules"]
 }

@@ -3,11 +3,12 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { REST } from '@discordjs/rest'
 import { Routes } from '@discordjs/core'
 
-import { FindChannelByOwnerId } from '#/domain/use-cases/find-channel-by-owner-id'
-import { CreateChannel } from '#/domain/use-cases/create-channel'
-import { PrismaChannelRepository } from '../database/repositories/prisma-channel-repository'
+import { CreateChannel } from '../../domain/use-cases/create-channel.js'
+import { FindChannelByOwnerId } from '../../domain/use-cases/find-channel-by-owner-id.js'
 
-import { AutomaticRemove } from './automatic-remove '
+import { PrismaChannelRepository } from '../database/repositories/prisma-channel-repository.js'
+
+import { AutomaticRemove } from './automatic-remove.js'
 
 import {
   CreateChannelCommand,
@@ -15,9 +16,9 @@ import {
   AllowMemberChannel,
   DenyMemberChannel,
   PrivateChannel
-} from './subcommands'
-import { FindChannelById } from '#/domain/use-cases/find-channel-by-id'
-import { RemoveChannel } from '#/domain/use-cases/remove-channel'
+} from './subcommands/index.js'
+import { FindChannelById } from '../../domain/use-cases/find-channel-by-id.js'
+import { RemoveChannel } from '../../domain/use-cases/remove-channel.js'
 
 const commands = new SlashCommandBuilder()
   .setName('channel')

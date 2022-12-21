@@ -1,4 +1,4 @@
-import { ChannelRepository } from '../repositories/channel'
+import { ChannelRepository } from '../repositories/channel.js'
 
 interface RemoveChannelRequest {
   channelId: string

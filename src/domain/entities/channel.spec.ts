@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-import { Channel } from './channel'
+import { Channel } from './channel.js'
 
 describe('VoiceChannel', () => {
   it('should be able create voice channel', () => {

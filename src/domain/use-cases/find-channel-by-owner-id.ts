@@ -1,6 +1,6 @@
-import { Channel } from '../entities/channel'
+import { Channel } from '../entities/channel.js'
 
-import { ChannelRepository } from '../repositories/channel'
+import { ChannelRepository } from '../repositories/channel.js'
 
 interface FindChannelByOwnerIdRequest {
   ownerId: string
